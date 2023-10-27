@@ -49,3 +49,19 @@ id,artist_name,track_name,track_id,popularity,danceability,energy,key,loudness,m
 48,Ariana Grande,34+35,6Im9k8u9iIzKMrmV7BWtlF,85,0.83,0.585,0,-6.476,1,0.094,0.237,0.0,0.248,0.485,109.978,173711,4
 49,Tate McRae,you broke me first,45bE4HXI0AwGZXfZtMp8JR,88,0.667,0.373,4,-9.389,1,0.05,0.785,0.0,0.0906,0.0823,124.148,169266,4
 50,Sebastian Yatra,Pareja Del Año,2rCbl9naJYhaxjLsfx88uM,86,0.715,0.622,4,-5.102,0,0.046,0.163,0.0,0.0948,0.808,80.015,195053,4
+
+SELECT * FROM Spotifydata
+
+WITH popularity_average_CTE AS (
+SELECT s.artist_name,
+AVG(s.popularity) AS average_popularity
+FROM SpotifyData s 
+GROUP BY s.artist_name
+)
+ 
+SELECT  artist_name,
+        average_popularity,
+        'Top Star' AS tag
+FROM popularity_average_CTE
+WHERE average_popularity>=90;
+
